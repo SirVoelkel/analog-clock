@@ -1,0 +1,210 @@
+/***** CSS Analog Uhr     *****/
+/*   ANCHOR Algemeine Angaben   */
+
+:root{
+    --color-seagreen: seagreen;
+    --color-purple: purple;
+    --color-clock: #0ef;
+    --color-background: #081b29;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+    background: var(--color-background);
+    overflow: hidden;
+}
+
+
+
+
+
+/*   ANCHOR Analog-Uhr Ziffernblatt   */
+
+.wrapper{
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+
+    animation: colorful 30s linear infinite;
+}
+
+@keyframes colorful{
+    100%{
+        filter: hue-rotate(360deg);
+    }
+}
+
+.bar-seconds,
+.number-hours{
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.bar-seconds span{
+    position: absolute;
+
+    /* 360deg / 60 = 6deg */
+    transform: rotate(calc(var(--index) * 6deg));
+    inset: -20px;
+    text-align: center;
+}
+
+.bar-seconds span p{
+    display: inline-block;
+
+    width: 2px;
+    height: 12px;
+    background: var(--color-clock);
+    border-radius: 2px;
+    box-shadow: 0 0 10px var(--color-clock);
+}
+
+/* jedes vielfache von Fünf */
+.bar-seconds span:nth-child(5n) p{
+    width: 6px;
+    height: 18px;
+
+    transform: translateY(1px);
+}
+
+.number-hours span{
+    position: absolute;
+
+    /* 360deg / 12 = 30deg; */
+    transform: rotate(calc(var(--index) * 30deg));
+    inset: 6px;
+    text-align: center;
+}
+
+.number-hours span p{
+    font-size: 52px;
+    color: var(--color-clock);
+    text-shadow: 0 0 10px var(--color-clock);
+
+    transform: rotate(calc(var(--index) * -30deg));
+}
+
+
+
+
+
+/*   ANCHOR Zeiger-Container   */
+
+.hands-box{
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hands-box .hand{
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+
+    border-radius: 50%;
+}
+
+.hands-box .hand i{
+    display: inline-block;
+
+    border-radius: 50%;
+    box-shadow: 0 0 10 var(--color-clock);
+
+    transform-origin: bottom;
+}
+
+
+
+
+
+/*   ANCHOR Zeiger   */
+
+/*   Stunden   */
+.hands-box .hours{
+    width: 320px;
+    height: 320px;
+}
+
+.hands-box .hours i{
+    width: 8px;
+    /* hälfte des Elternelements */
+    height: 160px;
+    background: var(--color-clock);
+}
+
+/*   Minuten   */
+.hands-box .minutes{
+    width: 450px;
+    height: 450px;
+}
+
+/* center dot button */
+.hands-box .minutes::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 25px;
+    height: 25px;
+    background: var(--color-clock);
+    border-radius: 50%;
+    box-shadow: 0 0 5px var(--color-clock);
+}
+
+.hands-box .minutes i{
+    width: 8px;
+    /* hälfte des Elternelements */
+    height: 225px;
+    background: var(--color-clock);
+}
+
+/*   Sekunden   */
+.hands-box .seconds{
+    width: 480px;
+    height: 480px;
+}
+
+/* center dot top */
+.hands-box .seconds::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .5);
+}
+
+.hands-box .seconds i{
+    width: 4px;
+    /* hälfte des Elternelements */
+    height: calc(240px + 70px);
+    background: #fff;
+    box-shadow: none;
+}
